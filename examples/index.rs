@@ -1,5 +1,6 @@
+
 #[macro_use]
-use rustrix::Matrix;
+use rustrix::*;
 
 
 fn main(){

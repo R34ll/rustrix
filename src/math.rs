@@ -1,7 +1,6 @@
 #![macro_use]
 use super::Matrix;
 
-
 use core::ops::{
     Add,Sub, Mul, Div
 };
@@ -73,7 +72,7 @@ impl<T:Div<Output=T> + Clone+Copy+Default> Div<Matrix<T>> for Matrix<T>{
 
 impl<T> Matrix<T>
 where 
-    T: std::ops::Mul<Output = T> + std::ops::AddAssign + Clone + Default,
+    T: core::ops::Mul<Output = T> + core::ops::AddAssign + Clone + Default+core::marker::Copy,
 {
     pub fn dot(&self, other: &Matrix<T>) -> Matrix<T> {
         let (self_rows, self_cols) = self.shape;

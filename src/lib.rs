@@ -1,7 +1,4 @@
 #![allow(dead_code)]
-
-extern crate alloc;
-use alloc::vec::Vec;
 mod math;
 mod impl_methods;
 
@@ -19,6 +16,20 @@ macro_rules! matrix{
 }
 
 
+pub struct Shape<const SIZE: usize> {
+    col: usize,
+    row: usize,
+}
+
+impl<const SIZE: usize> Shape<SIZE> {
+    pub fn new(col: usize, row: usize) -> Self {
+        Self { col, row }
+    }
+
+    pub fn size(&self) -> usize {
+        SIZE
+    }
+}
 
 
 #[derive(Clone, PartialEq)]
@@ -29,7 +40,7 @@ pub struct Matrix<T>{
 
 impl<T> Matrix<T>
 where
-    T:Clone+Default
+    T:Clone+Default+core::marker::Copy
 {
     #[inline]
     pub fn new(shape:(usize,usize), data:&[T])->Self{
@@ -119,7 +130,7 @@ mod tests {
         let data:Matrix<i32> = matrix!([4,5,6],[6,7,8]);
 
         assert_eq!(
-            Matrix::new_from_vec((1,3),vec![6,7,8]), 
+            Matrix::new_from_vec((1,3),[6,7,8].to_vec()), 
             data.row(1)
             );
     }
