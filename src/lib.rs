@@ -1,10 +1,10 @@
 #![allow(dead_code)]
-extern crate alloc;
-use std::{ops::{Index, Add}, mem::transmute};
 
+extern crate alloc;
 use alloc::vec::Vec;
 mod math;
 mod impl_methods;
+
 
 
 #[macro_export]
@@ -13,7 +13,7 @@ macro_rules! matrix{
         {
             let mut temp_vec = Vec::new();
             $(temp_vec.push($data);)*
-            Matrix::new_from_vec((temp_vec[0].len(),temp_vec.len()),temp_vec.into_iter().flatten().collect())
+            Matrix::new_from_vec((temp_vec.len(),temp_vec[0].len()),temp_vec.into_iter().flatten().collect())
         }
     };
 }
@@ -78,17 +78,9 @@ where
 
 
     pub fn transpose(&self)->Self{
-        let mut transposed:Vec<T> = Vec::with_capacity(self.data.len());
-        
-        for c in 0..self.shape.0{
-            for r in 0..self.shape.1{
-                transposed.push(self.data[r * self.shape.0 + c].clone());
-            }
-        }
-
         Matrix{
             shape:(self.shape.1,self.shape.0),
-            data:transposed
+            data:self.data.clone()
         }
     }
 

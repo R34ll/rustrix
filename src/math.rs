@@ -73,29 +73,33 @@ impl<T:Div<Output=T> + Clone+Copy+Default> Div<Matrix<T>> for Matrix<T>{
 
 impl<T> Matrix<T>
 where 
-    T: std::ops::Mul<Output = T> + std::ops::Add<Output = T> + Default + Clone + Copy 
+    T: std::ops::Mul<Output = T> + std::ops::AddAssign + Clone + Default,
 {
-    pub fn dot(&self, other:&Matrix<T>)->Matrix<T>{
-        // assert!(self.shape.1 != other.shape.0,"Incompatible matrix dimensions for dot product");
-        
-        let mut result = Matrix::zeros((self.shape.0, other.shape.1));
-        dbg!(result.shape, result.data.len());
-        
-        for i in 0..self.shape.0{
-            for j in 0..other.shape.1{
-                let mut dot_product = T::default();
-                for k in 0..self.shape.1{
-                    let aik = self.data[k*self.shape.1+k];
-                    let akj = other.data[k*other.shape.1+j.clone()];
-                    dot_product = dot_product + (aik * akj);
-                } 
-                result.set_value((i,j), dot_product);
-            } 
+    pub fn dot(&self, other: &Matrix<T>) -> Matrix<T> {
+        let (self_rows, self_cols) = self.shape;
+        let (other_rows, other_cols) = other.shape;
+
+        // Check if the matrices can be multiplied
+        if self_cols != other_rows {
+            panic!("Matrix dimensions are incompatible for dot product.");
         }
 
-        result
+        let mut result_data = Vec::with_capacity(self_rows * other_cols);
 
+        for i in 0..self_rows {
+            for j in 0..other_cols {
+                let mut sum: T = Default::default();
+                for k in 0..self_cols {
+                    sum += self.get((i, k)) * other.get((k, j));
+                }
+                result_data.push(sum);
+            }
+        }
 
+        Matrix {
+            shape: (self_rows, other_cols),
+            data: result_data,
+        }
     }
 }
 
@@ -108,7 +112,8 @@ where
 
 #[cfg(test)]
 mod math{
-    use super::Matrix;
+    #![macro_use]
+    use crate::*;
 
     #[test]
     fn dot(){
