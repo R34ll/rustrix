@@ -9,4 +9,4 @@ fn main(){
 
     println!("Result: {:?}",a.dot(&b.transpose()));
 }
-``
+```
