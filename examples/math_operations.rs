@@ -1,11 +1,13 @@
 #[macro_use]
-use matrix_rs::*;
+use rustrix::*;
 
 fn main(){
 
-    let a = Matrix![[4,5,6],[6,7,8]];
+    let a = matrix![[1,2,3],[4,5,6]];
+    let b = matrix![[7,8,9],[10,11,12]];
+    
+    println!("Result: {:?}",a.dot(&b.transpose()));
 
-    println!("{:?}",a);
 
 
 }

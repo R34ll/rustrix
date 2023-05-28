@@ -8,7 +8,7 @@ mod impl_methods;
 
 
 #[macro_export]
-macro_rules! Matrix{
+macro_rules! matrix{
     ($($data:expr),*)=>{
         {
             let mut temp_vec = Vec::new();
@@ -114,17 +114,17 @@ mod tests {
 
     #[test]
     fn transpose_func(){
-        let data = Matrix![[4,5,6],[6,7,8]];
+        let data = matrix![[4,5,6],[6,7,8]];
 
         assert_eq!(
-            Matrix![[4,6],[5,7],[6,8]],
+            matrix![[4,6],[5,7],[6,8]],
             data.transpose()
             );
     }
 
     #[test]
     fn get_row_func(){
-        let data:Matrix<i32> = Matrix!([4,5,6],[6,7,8]);
+        let data:Matrix<i32> = matrix!([4,5,6],[6,7,8]);
 
         assert_eq!(
             Matrix::new_from_vec((1,3),vec![6,7,8]), 
@@ -134,14 +134,14 @@ mod tests {
 
     #[test]
     fn get_func(){
-        let data:Matrix<i32> = Matrix!([4,5,6],[6,7,8]);
+        let data:Matrix<i32> = matrix!([4,5,6],[6,7,8]);
         assert_eq!(5, data.get((0,1)));
     }
 
 
     #[test]
     fn macro_test(){
-        let data:Matrix<i32> = Matrix!([4,5,6],[6,7,8]);
+        let data:Matrix<i32> = matrix!([4,5,6],[6,7,8]);
 
         assert_eq!(data.shape.0, 3);
         assert_eq!(data.shape.1, 2);

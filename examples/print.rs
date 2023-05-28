@@ -1,10 +1,10 @@
 
 #[macro_use]
-use matrix_rs::*;
+use rustrix::*;
 
 fn main(){
 
-    let data = Matrix!([4,5,6],[7,8,9]);
+    let data = matrix!([4,5,6],[7,8,9]);
 
     println!("{:?}",data);
 

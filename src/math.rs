@@ -112,41 +112,41 @@ mod math{
 
     #[test]
     fn dot(){
-        let a:Matrix<i32> = Matrix![[4,5,6],[7,8,9]];
+        let a:Matrix<i32> = matrix![[4,5,6],[7,8,9]];
         
-        assert_eq!(a.clone().dot(&a.transpose()), Matrix![[100,75],[163,117]]);
+        assert_eq!(a.clone().dot(&a.transpose()), matrix![[100,75],[163,117]]);
     }
 
     #[test]
     fn addition(){
-        let a:Matrix<i32> = Matrix![[4,5,6],[5,4,3]];
-        let b:Matrix<i32> = Matrix![[9,4,8],[1,4,6]];
+        let a:Matrix<i32> = matrix![[4,5,6],[5,4,3]];
+        let b:Matrix<i32> = matrix![[9,4,8],[1,4,6]];
 
-        assert_eq!(a+b, Matrix![[13,9,14],[6,8,9]]);
+        assert_eq!(a+b, matrix![[13,9,14],[6,8,9]]);
     }
 
     #[test]
     fn subtraction(){
-        let a:Matrix<i32> = Matrix![[4,5,6],[5,4,3]];
-        let b:Matrix<i32> = Matrix![[9,4,8],[1,4,6]];
+        let a:Matrix<i32> = matrix![[4,5,6],[5,4,3]];
+        let b:Matrix<i32> = matrix![[9,4,8],[1,4,6]];
 
-        assert_eq!(a-b, Matrix![[-5,1,-2 ],[4,0,-3]]);
+        assert_eq!(a-b, matrix![[-5,1,-2 ],[4,0,-3]]);
     }
 
     #[test]
     fn multiplication(){
-        let a:Matrix<i32> = Matrix![[4,5,6],[5,4,3]];
-        let b:Matrix<i32> = Matrix![[9,4,8],[1,4,6]];
+        let a:Matrix<i32> = matrix![[4,5,6],[5,4,3]];
+        let b:Matrix<i32> = matrix![[9,4,8],[1,4,6]];
 
-        assert_eq!(a*b, Matrix![[36,20,48 ],[5,16,18]]);
+        assert_eq!(a*b, matrix![[36,20,48 ],[5,16,18]]);
     }
 
      #[test]
     fn division(){
-        let a:Matrix<i32> = Matrix![[4,5,6],[5,4,3]];
-        let b:Matrix<i32> = Matrix![[9,4,8],[1,4,6]];
+        let a:Matrix<i32> = matrix![[4,5,6],[5,4,3]];
+        let b:Matrix<i32> = matrix![[9,4,8],[1,4,6]];
 
-        assert_eq!(a/b, Matrix![[0,1,0 ],[5,1,0]]);
+        assert_eq!(a/b, matrix![[0,1,0 ],[5,1,0]]);
     }
 
 
